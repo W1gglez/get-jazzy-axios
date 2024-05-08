@@ -1,54 +1,17 @@
 const express = require('express');
-
 const app = express();
 const PORT = 5001;
 
-const artistListArray = [
-    {
-        name: 'Miles Davis',
-        born: 1926,
-        died: 1990,
-    },
-    {
-        name: 'Duke Ellington',
-        born: 1899,
-        died: 1974,
-    },
-    {
-        name: 'John Coltrane',
-        born: 1926,
-        died: 1987,
-    },
-    {
-        name: 'Louis Daniel Armstrong',
-        born: 1901,
-        died: 1971,
-    },
-];
+app.use(express.json());
 
-const songListArray = [
-    {
-        title: 'Take Five',
-        artist: 'The Dave Brubeck Quartet',
-    },
-    {
-        title: 'So What',
-        artist: 'Miles Davis',
-    },
-    {
-        title: 'Sing Sing Sing',
-        artist: 'Benny Goodman',
-    },
-    {
-        title: 'Take the "A" Train',
-        artist: 'The Dave Brubeck Quartet',
-    },
-];
+const artistListArray = require('./public/modules/artist');
+
+const songListArray = require('./public/modules/song');
 
 app.use(express.static('server/public'));
 
 app.get('/artist', (req, res) => {
-    res.send(artistListArray);
+  res.send(artistListArray);
 });
 
 // TODO - Add GET for songs
@@ -58,6 +21,21 @@ app.get('/song', (req, res) => {
   res.send(songListArray);
 });
 
+app.post('/artist', (req, res) => {
+  console.log('Processing /artist POST');
+  let artist = req.body;
+  artistListArray.push(artist);
+
+  res.status(200).send(artist);
+});
+
+app.post('/song', (req, res) => {
+  console.log('Processing /song POST');
+  let song = req.body;
+  songListArray.push(song);
+  res.status(200).send(song);
+});
+
 app.listen(PORT, () => {
-    console.log('listening on port', PORT)
+  console.log('listening on port', PORT);
 });

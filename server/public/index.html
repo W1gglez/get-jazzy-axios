@@ -6,11 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Get Jazzy</title>
     <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script defer src="scripts/client.js"></script>
+    <script defer src="scripts/client.js" defer></script>
 </head>
 <body>
     <h1>Get Jazzy</h1>
-
+    <form onsubmit="addArtist(event)">
+    <input type="text" id="artist-name" placeholder="Name" required>
+    <input type="text" id="artist-birth" placeholder="Date of Birth" required>
+    <input type="text" id="artist-death" placeholder="Date of Death" required>
+    <button>Submit</button>
+    </form>
     <h2>Famous Jazz Artists</h2>
     <table>
         <thead>
@@ -22,6 +27,12 @@
         </thead>
         <tbody id="artistTableBody"></tbody>
     </table>
+
+    <form onsubmit="addSong(event)">
+        <input type="text" id="song-title" placeholder="Title" required>
+        <input type="text" id="song-artist" placeholder="Artist" required>
+        <button>Submit</button>
+        </form>
 
     <h2>Famous Jazz Songs</h2>
     <table>
