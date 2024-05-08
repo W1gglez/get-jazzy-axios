@@ -52,6 +52,27 @@ function onReady() {
       console.log(error);
       alert('Something went wrong, check console for more detail.');
     });
+
+    axios
+      .get('/album')
+      .then((response) => {
+        console.log(response);
+        let albumsFromServer = response.data;
+        let contentDiv = document.querySelector('#albumTableBody');
+        contentDiv.innerHTML = '';
+        for (const album of albumsFromServer) {
+          contentDiv.innerHTML += `
+                <tr>
+                <td>${album.title}</td>
+                <td>${album.year}</td>
+                </tr>
+                `;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Something went wrong, check console for more detail.');
+      });
 }
 
 onReady();
@@ -100,6 +121,28 @@ function addSong(event) {
 
       document.getElementById('song-title').value = '';
       document.getElementById('song-artist').value = '';
+
+      onReady();
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('Trouble adding song, check console for more info.');
+    });
+}
+
+function addAlbum(event) {
+  event.preventDefault();
+
+  const title = document.getElementById('album-title').value;
+  const year = document.getElementById('album-year').value;
+
+  axios
+    .post('/album', { title, year })
+    .then((response) => {
+      console.log('Processing POST /song request');
+
+      document.getElementById('album-title').value = '';
+      document.getElementById('album-year').value = '';
 
       onReady();
     })

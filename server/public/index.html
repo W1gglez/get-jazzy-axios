@@ -44,5 +44,23 @@
         </thead>
         <tbody id="songTableBody"></tbody>
     </table>
+
+    <form onsubmit="addAlbum(event)">
+        <input type="text" id="album-title" placeholder="Title" required>
+        <input type="text" id="album-year" placeholder="Year" required>
+        <button>Submit</button>
+        </form>
+
+    <h2>Famous Jazz Albums</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody id="albumTableBody"></tbody>
+    </table>
+
 </body>
 </html>

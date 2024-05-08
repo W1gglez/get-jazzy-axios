@@ -7,6 +7,7 @@ app.use(express.json());
 const artistListArray = require('./public/modules/artist');
 
 const songListArray = require('./public/modules/song');
+const albumList = require('./public/modules/album');
 
 app.use(express.static('server/public'));
 
@@ -34,6 +35,16 @@ app.post('/song', (req, res) => {
   let song = req.body;
   songListArray.push(song);
   res.status(200).send(song);
+});
+
+app.get('/album', (req, res) => {
+  res.send(albumList);
+});
+
+app.post('/album', (req, res) => {
+  let album = req.body;
+  albumList.push(album);
+  res.status(200).send(album);
 });
 
 app.listen(PORT, () => {
